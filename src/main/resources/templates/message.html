@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Reset Password</title>
+</head>
+<body>
+<div id="content">
+    <div class="container p-5" style="margin-top: 100px">
+        <div class="row">
+            <div class="col-md-6 p-5 text-center offset-md-3" style="margin-top: 150px;">
+                <h3 class="fw-bold">[[${message}]]</h3>
+                <a th:href="@{/dealnest/login}">
+                    <button type="button" class="btn bg-black text-white col-md-12" style="margin-top: 50px;">Return to login</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<div id="content">
+    <div class="container-fluid bg-dark p-5 mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form th:action="@{/dealnest/search}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for products, brands and more">
+                        <button class="btn btn-light text-dark ms-3 col-md-2"><i class="fa-solid fa-magnifying-glass"></i>  Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-1">
+        <div class="row">
+            <div class="col-md-2 p-0">
+                <div class="card cat-div shadow-sm bg-body-tertiary rounded p-0 mb-5">
+                    <div class="card-body text-center">
+                        <div class="list-group">
+                            <p class="fs-5 fw-bold text-center">Categories</p>
+                            <a th:href="@{/dealnest/products}"
+                               th:classappend="${paramValue == null} ? 'active bg-black text-white' : ''"
+                               class="list-group-item list-group-item-action" aria-current="true">
+                                All
+                            </a>
+                            <a th:href="@{'/dealnest/products?category='+${categories.name}}"
+                               th:each="categories:${categories}"
+                               th:classappend="${paramValue == categories.name} ? 'active bg-black text-white' : ''"
+                               class="list-group-item list-group-item-action">
+                                [[${categories.name}]]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="fs-3 text-center fw-bold">Products</p>
+                        <div class="row">
+                            <th:block th:if="${products.size > 0}">
+                                <div class="col-md-3 mb-3" th:each="products:${products}">
+                                    <div class="card cat-div shadow-sm bg-body-tertiary rounded">
+                                        <div class="card-body text-center">
+                                            <img th:src="@{'/images/product/' + ${products.imageName}}" alt="..." width="80%" height="150px">
+                                            <p class="fs-5 text-center">[[${products.title}]]</p>
+                                            <div class="row text-center">
+                                                <p class="fs-6 fw-bold">&#8377 [[${products.discountedPrice}]]<br>
+                                                    <span class="fs-6 m-2 fw-light text-decoration-line-through" style="color: #787a79;">
+                                                        &#8377 [[${products.price}]]
+                                                    </span>
+                                                    <span class="fs-6 text-success m-2 ">
+                                                        [[${products.discount}]] %
+                                                    </span>
+                                                </p>
+                                                <a th:href="@{'/dealnest/viewproduct/'+${products.id}}" class="btn btn-dark col-md-6 offset-md-3">
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:unless="${products.size > 0}">
+                                <p class="fs-4 text-center" style="margin-top: 100px;">😢Ooops..... No products found Under this category.</p>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<div id="content">
+    <div class="container p-5">
+        <p class="text-center fs-3 mt-4 fw-bold">Admin Dashboard</p>
+        <div class="row p-5">
+            <div class="col-md-4 mt-2">
+                <a th:href="@{/dealnest/admin/add-product}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <i class="fa-solid fa-circle-plus fa-3x mt-3"></i>
+                            <p class="fs-5 mt-4 mb-5 fw-bold">Add Product</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <a th:href="@{/dealnest/admin/add-category}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-warning">
+                            <i class="fa-solid fa-list fa-3x mt-3"></i>
+                            <p class="fs-5 mt-4 mb-5 fw-bold">Category</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-2">
+                <a th:href="@{/dealnest/admin/view-products}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-success">
+                            <i class="fa-solid fa-eye fa-3x mt-3"></i>
+                            <p class="fs-5 mt-4 mb-5 fw-bold">View Product</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a th:href="@{/dealnest/admin/view-orders}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-primary">
+                            <i class="fa-solid fa-box-open fa-3x mt-3"></i>
+                            <p class="fs-5 mt-4 mb-5 fw-bold">Orders</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a th:href="@{/dealnest/admin/web-users}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-warning">
+                            <i class="fa-solid fa-user fa-3x mt-3"></i>
+                            <p class="fs-5 mt-4 mb-5 fw-bold">Users</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <a th:href="@{/dealnest/admin/add-admin}" class="text-decoration-none">
+                    <div class="card card-sh">
+                        <div class="card-body text-center text-success">
+                            <i class="fa-solid fa-user-plus fa-3x mt-3"></i>
+                            <p class="fs-5 mt-4 mb-5 fw-bold">Add Admin</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

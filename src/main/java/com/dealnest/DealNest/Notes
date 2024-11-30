@@ -1,0 +1,11 @@
+To - Do -
+
+1- Before clicking on the Add to Cart button it should be add to cart only but after clicking it should be go to cart // make Changes in view-product.html
+
+2- After clicking on place order button it should go to a confirmation page.
+
+3- When we are ordering multiple products then only 1 product is getting ordered so we should fix this.
+
+4- if a user already exists they should not be able to register again
+
+5- if the status is order canceled then we should remove the delivery date

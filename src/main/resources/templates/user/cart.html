@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<div id="content">
+    <div class="container card-sh" style="margin-top: 80px; margin-bottom: 10px">
+        <div class="text-center fs-2 fw-bold" style="padding-top: 300px; padding-bottom: 300px;" th:if="${#lists.isEmpty(cart)}">
+            <p>Your cart is empty......😢</p>
+        </div>
+        <div class="col-md-8 offset-md-2 p-5" th:each="cart:${cart}">
+            <div class="row">
+                <hr>
+                <div class="col-md-6" style="margin-top: 30px; margin-left: -50px;">
+                    <img th:src="@{'/images/product/' + ${cart.product.imageName}}" alt="..." width="120px" height="120px">
+                </div>
+                <div class="col-md-6" style="margin-top: -50px;">
+                    <p class="fs-5 fw-bold">[[${cart.product.title}]]</p>
+                    <p>[[${cart.product.description}]]</p>
+                    <p class="fs-5 fw-bold">
+                        &#8377 [[${cart.totalPrice}]] &nbsp;
+                        <span class="fs-6 text-decoration-line-through text-secondary">&#8377 [[${cart.mrp}]]</span>
+                        <span class="fs-6 text-success">&nbsp;[[${cart.product.discount}]] %</span> <br>
+                        <p class="text-success fs-20 fw-bold">1 coupon Applied</p> <br>
+                    <p class="fs-4">
+                        <a th:href="@{'/dealnest/user/update-quantity?sy=de&cartId='+${cart.id}}"><i class="fa-solid fa-circle-minus"></i></a>
+                        &nbsp; [[${cart.quantity}]] &nbsp;
+                        <a th:href="@{'/dealnest/user/update-quantity?sy=in&cartId='+${cart.id}}"><i class="fa-solid fa-circle-plus"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr style="border: none; border-top: 3px solid black; margin: 20px 0;">
+        <footer class="text-center fs-4 fw-bold">
+            Total Amount  &nbsp; - &nbsp;   &#8377 [[${totalAmount}]]
+            <br>
+            <a class="btn btn-dark mb-5 mt-4" style="padding-left: 50px; padding-right: 50px;" th:href="@{/dealnest/user/checkout}">Proceed to Pay</a>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

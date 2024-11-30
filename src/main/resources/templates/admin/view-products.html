@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Products</title>
+</head>
+<body>
+<div id="content">
+    <div class="container-fluid bg-dark p-5 mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form th:action="@{/dealnest/admin/search-product}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for products, brands and more">
+                        <button class="btn btn-light text-dark ms-3 col-md-2"><i class="fa-solid fa-magnifying-glass"></i>  Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container p-2" style="margin-bottom: 310px; margin-top: 80px;">
+        <div class="card card-sh">
+            <div class="card-header text-center">
+                <p class="fs-4 fw-bold">All Products</p>
+                <th:block th:if="${session.successDeleteMessage}">
+                    <p class="text-success">[[${session.successDeleteMessage}]]</p>
+                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+                <th:block th:if="${session.errorDeleteMessage}">
+                    <p class="text-danger">[[${session.errorDeleteMessage}]]</p>
+                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Product ID</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Discount Price</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="products, p:${products}">
+                        <th scope="row">[[${products.id}]]</th>
+                        <td><img th:src="@{'/images/product/' + ${products.imageName}}" width="60px" height="50px"></td>
+                        <td>[[${products.title}]]</td>
+                        <td>[[${products.category}]]</td>
+                        <td>[[${products.price}]]</td>
+                        <td>[[${products.discount}]]&nbsp;%</td>
+                        <td>[[${products.discountedPrice}]]</td>
+                        <td>[[${products.stock}]]</td>
+                        <td>[[${products.isActive}]]</td>
+                        <td>
+                            <a th:href="@{'/dealnest/admin/edit-product/'+ ${products.id}}"><i class="fa-solid fa-pen-to-square text-dark"></i></a>
+                            <a th:href="@{'/dealnest/admin/delete-product/'+ ${products.id}}" style="margin-left: 10px;"><i class="fa-solid fa-trash text-danger"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

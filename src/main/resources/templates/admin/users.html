@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Users</title>
+</head>
+<body>
+<div id="content">
+    <div class="container-fluid bg-dark p-5 mt-5">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <form th:action="@{/dealnest/admin/search-user}" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search with email">
+                        <button class="btn btn-light text-dark ms-3 col-md-2"><i class="fa-solid fa-magnifying-glass"></i>  Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container p-2" style="margin-bottom: 310px; margin-top: 80px;">
+        <div class="card card-sh" style="margin-left: -30px; margin-right: -30px;">
+            <div class="card-header text-center">
+                <p class="fs-4 fw-bold">Users</p>
+                <th:block th:if="${session.successMessage}">
+                    <p class="text-success fw-bold">[[${session.successMessage}]]</p>
+                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+                <th:block th:if="${session.errorMessage}">
+                    <p class="text-danger fw-bold">[[${session.errorMessage}]]</p>
+                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                </th:block>
+                <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-left: 20px;">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active fw-bold" style="padding-left: 300px; padding-right: 300px;" id="users-tab" data-bs-toggle="tab" data-bs-target="#users-tab-pane"
+                                type="button" role="tab" aria-controls="users-tab-pane" aria-selected="true">
+                            Users
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link fw-bold" id="admin-tab" style="padding-left: 300px; padding-right: 300px;" data-bs-toggle="tab" data-bs-target="#admin-tab-pane"
+                                type="button" role="tab" aria-controls="admin-tab-pane" aria-selected="false">
+                            Admin
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="users-tab-pane" role="tabpanel" aria-labelledby="users-tab" tabindex="0">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">User ID</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Mobile Number</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Pin Code</th>
+                                    <th scope="col">Account Status</th>
+                                    <th scope="col" style="padding-left: 60px;">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="users, p:${users}">
+                                    <th scope="row">[[${users.id}]]</th>
+                                    <td><img class="user-image" th:src="@{'/images/user/' + ${users.imageName}}"></td>
+                                    <td>[[${users.name}]]</td>
+                                    <td>[[${users.email}]]</td>
+                                    <td>[[${users.phoneNumber}]]</td>
+                                    <td>[[${users.city}]]</td>
+                                    <td>[[${users.state}]]</td>
+                                    <td>[[${users.pinCode}]]</td>
+                                    <td style="padding-left: 50px">
+                                        <!-- Display an icon if enabled is true -->
+                                        <span th:if="${users.isEnabled}">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </span>
+
+                                        <!-- Display a different icon if enabled is false -->
+                                        <span th:unless="${users.isEnabled}">
+                                            <i class="fa-solid fa-ban"></i> <!-- Example disabled icon -->
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <a th:href="@{'/dealnest/admin/update-status?status=true&id='+ ${users.id}}" class="btn btn-primary">Active</a>
+                                        <a th:href="@{'/dealnest/admin/update-status?status=false&id='+ ${users.id}}" class="btn btn-danger" style="margin-left: 10px;">Inactive</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="admin-tab-pane" role="tabpanel" aria-labelledby="admin-tab" tabindex="0">
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Admin ID</th>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Mobile Number</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Pin Code</th>
+                                    <th scope="col">Account Status</th>
+                                    <th scope="col" style="padding-left: 60px;">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="admin, p:${admin}">
+                                    <th scope="row">[[${admin.id}]]</th>
+                                    <td><img class="user-image" th:src="@{'/images/user/' + ${admin.imageName}}"></td>
+                                    <td>[[${admin.name}]]</td>
+                                    <td>[[${admin.email}]]</td>
+                                    <td>[[${admin.phoneNumber}]]</td>
+                                    <td>[[${admin.city}]]</td>
+                                    <td>[[${admin.state}]]</td>
+                                    <td>[[${admin.pinCode}]]</td>
+                                    <td style="padding-left: 50px">
+                                        <!-- Display an icon if enabled is true -->
+                                        <span th:if="${admin.isEnabled}">
+                                            <i class="fa-solid fa-user-check"></i>
+                                        </span>
+
+                                        <!-- Display a different icon if enabled is false -->
+                                        <span th:unless="${admin.isEnabled}">
+                                            <i class="fa-solid fa-ban"></i> <!-- Example disabled icon -->
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <a th:href="@{'/dealnest/admin/update-status?status=true&id='+ ${admin.id}}" class="btn btn-primary">Active</a>
+                                        <a th:href="@{'/dealnest/admin/update-status?status=false&id='+ ${admin.id}}" class="btn btn-danger" style="margin-left: 10px;">Inactive</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

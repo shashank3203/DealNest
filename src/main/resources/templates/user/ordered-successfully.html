@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Placed Successfully</title>
+</head>
+<body>
+<div id="content">
+    <div class="container p-5 mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center" style="padding-top: 170px;">
+                <div class="card card-sh">
+                    <div class="card-body">
+                        <img src="/images/user/check.png" class="image-class" height="100px"/><br>
+                        <h2 class="text-center">Order Placed Successfully</h2>
+                        <p>Your order has been successfully placed. We will process your order and provide you with the delivery details soon.</p>
+                        <a th:href="@{/dealnest/}" class="btn btn-dark">Return to Homepage</a><br>
+                        <a th:href="@{'/dealnest/user/order-details?orderId='+${order.orderId}}" class="btn btn-success" style="margin-top: 10px">Order Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

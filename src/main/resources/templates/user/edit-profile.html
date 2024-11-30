@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+</head>
+<body>
+<div id="content">
+    <div class="container mt-5 p-5">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="card card-sh">
+                    <div class="card-header">
+                        <h1 class="page-header text-center" style="font-size: 25px;">Hello, [[${user.name}]]</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img class="border p-2" th:src="@{'/images/user/' + ${user.imageName}}" style="width: 150px; height: 150px; border-radius: 50%;" alt="...">
+                        </div>
+                        <form th:action="@{/dealnest/user/update-profile}" method="POST" enctype="multipart/form-data">
+                            <div>
+                                <h5 style="font-size: 20px; font-weight: bold; margin-top: 20px;">Personal Information</h5>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <input type="hidden" name="id" th:value="${user.id}"/>
+                                    <input type="text" class="form-control" id="name" name="name" th:value="${user.name}" />
+                                </div>
+                            </div>
+                            <div>
+                                <h5 style="font-size: 20px; font-weight: bold; margin-top: 50px;">Email Address</h5>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="email" name="email" th:value="${user.email}" disabled/>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 style="font-size: 20px; font-weight: bold; margin-top: 50px;">Mobile Number</h5>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${user.phoneNumber}" />
+                                </div>
+                            </div>
+                            <div>
+                                <h5 style="font-size: 20px; font-weight: bold; margin-top: 50px;">Address Information</h5>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="address" name="address" th:value="${user.address}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="city" name="city" th:value="${user.city}" />
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="state" name="state" th:value="${user.state}" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="pinCode" name="pinCode" th:value="${user.pinCode}" />
+                                </div>
+                            </div>
+                            <div>
+                                <h5 style="font-size: 20px; font-weight: bold; margin-top: 50px;">Profile Image</h5>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-md-6">
+                                    <input type="file" class="form-control" id="file" name="file" value=""/>
+                                </div>
+                            </div>
+                            <div class="text-center" style="margin-top: 50px;">
+                                <button type="submit" class="btn btn-success">Save Changes</button>
+                            </div>
+                            <hr>
+                            <div class="text-center" style="margin-top: 50px;">
+                                <a th:href="@{/dealnest/user/change-password}" class="btn btn-dark text-decoration-none" style="padding-left: 50px; padding-right: 50px;">
+                                    Change Password  &nbsp;<i class="fa-solid fa-lock"></i>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <!--                    th:src="@{'/images/user/' + ${user.imageName}}"-->
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

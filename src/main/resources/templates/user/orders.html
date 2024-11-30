@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: layout(~{:: #content}, ~{:: title})}">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders</title>
+</head>
+<body>
+<div id="content">
+    <div class="container p-5 mt-5" style="margin-bottom: 500px;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="card card-sh">
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <div class="text-center fs-2 fw-bold" style="padding-top: 300px; padding-bottom: 300px;" th:if="${#lists.isEmpty(orders)}">
+                                <p>Your orders is empty......😢</p>
+                            </div>
+                            <tbody>
+                            <!-- Iterate over each order -->
+                            <tr th:each="orders : ${orders}">
+                                <td colspan="4">
+                                    <!-- Wrap the entire row inside an anchor tag to make it clickable -->
+                                    <a th:href="@{'/dealnest/user/order-information?orderId='+${orders.orderId}}" style="text-decoration: none;">
+                                        <div class="card card-sh" style="border: 1px solid #ddd; margin: 10px;">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <img th:src="@{'/images/product/' + ${orders.products.imageName}}" width="60px" height="50px" alt="Product image">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h5 class="card-title" th:text="${orders.products.title}">Product Title</h5>
+                                                        <p class="card-text text-success">Item will be delivered by 30th Feb 2025</p>
+                                                    </div>
+                                                    <div class="col-md-2 text-center fw-bold">
+                                                        &#8377; <span th:text="${orders.price}">Price</span>
+                                                    </div>
+                                                    <div class="col-md-2 text-center text-success fw-bold">
+                                                        <p class="card-text text-muted">Status: [[${orders.status}]]</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
